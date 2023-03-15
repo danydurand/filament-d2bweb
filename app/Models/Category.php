@@ -18,5 +18,27 @@ class Category extends Model
         'sync_at'
     ];
 
+    public $appends = [
+        'lines_count'
+    ];
+
+    //------------
+    // Additions
+    //------------
+
+    public function getLinesCountAttribute()
+    {
+        return $this->lines()->count();
+    }
+
+
+    //----------------
+    // Relationships
+    //----------------
+
+    public function lines()
+    {
+        return $this->hasMany(Line::class);
+    }
 
 }

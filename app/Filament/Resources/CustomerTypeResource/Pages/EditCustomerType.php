@@ -11,13 +11,6 @@ class EditCustomerType extends EditRecord
 {
     protected static string $resource = CustomerTypeResource::class;
 
-    // protected function mutateFormDataBeforeSave(array $data): array
-    // {
-    //     $data['updated_by'] = auth()->id();
-
-    //     return $data;
-    // }
-
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
         $data['code'] = strtoupper($data['code']);
@@ -29,16 +22,16 @@ class EditCustomerType extends EditRecord
         return $record;
     }
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function getActions(): array
     {
         return [
             Actions\DeleteAction::make(),
         ];
-    }
-
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
     }
 
 }

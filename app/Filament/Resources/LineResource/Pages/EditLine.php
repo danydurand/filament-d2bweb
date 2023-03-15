@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\CustomerTypeResource\Pages;
+namespace App\Filament\Resources\LineResource\Pages;
 
-use App\Filament\Resources\CustomerTypeResource;
+use App\Filament\Resources\LineResource;
 use Filament\Pages\Actions;
-use Filament\Resources\Pages\ListRecords;
+use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 
-class ListCustomerTypes extends ListRecords
+class EditLine extends EditRecord
 {
-    protected static string $resource = CustomerTypeResource::class;
+    protected static string $resource = LineResource::class;
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
@@ -29,7 +29,7 @@ class ListCustomerTypes extends ListRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\DeleteAction::make(),
         ];
     }
 }

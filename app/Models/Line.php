@@ -12,6 +12,8 @@ class Line extends Model
     protected $fillable = [
         'description',
         'category_id',
+        'created_by',
+        'updated_by',
         'must_be_sync',
         'sync_at'
     ];

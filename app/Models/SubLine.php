@@ -12,9 +12,24 @@ class SubLine extends Model
     protected $fillable = [
         'description',
         'linea_id',
+        'created_by',
+        'updated_by',
         'must_be_sync',
         'sync_at'
     ];
+
+    public $appends = [
+        'sub_lines_count'
+    ];
+
+    //------------
+    // Additions
+    //------------
+
+    public function getSubLinesCountAttribute()
+    {
+        return $this->sub_lines()->count();
+    }
 
     //----------------
     // Relationships

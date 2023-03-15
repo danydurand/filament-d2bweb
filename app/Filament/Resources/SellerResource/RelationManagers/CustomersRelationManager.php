@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 use Filament\Forms\Components\TextInput;
@@ -16,6 +17,8 @@ use Filament\Forms\Components\Card;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Grid;
+
+use Filament\Tables\Actions\CreateAction;
 
 
 class CustomersRelationManager extends RelationManager
@@ -45,7 +48,7 @@ class CustomersRelationManager extends RelationManager
                         ->relationship('customer_type', 'description'),
                     Select::make('seller_id')
                         ->label('Seller')
-                        ->required()
+                        ->disabled()
                         ->relationship('seller', 'name'),
                     TextInput::make('contact_name')
                         ->maxLength(60)
@@ -61,9 +64,11 @@ class CustomersRelationManager extends RelationManager
                         ->maxLength(250)
                         ->rows(2)
                         ->required(),
+
                 ])
             ])
         ]);
+
     }
 
     public static function table(Table $table): Table
@@ -94,4 +99,5 @@ class CustomersRelationManager extends RelationManager
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
+
 }

@@ -52,10 +52,10 @@ class CategoryResource extends Resource
             TextColumn::make('description')
                 ->sortable()
                 ->searchable(),
-            // TextColumn::make('customers_count')
-            //     ->label('Customers')
-            //     ->alignCenter()
-            //     ->sortable(),
+            TextColumn::make('lines_count')
+                ->label('Lines')
+                ->alignCenter()
+                ->sortable(),
             TextColumn::make('created_at')
                 ->dateTime("Y-m-d H:i:s")
                 ->alignCenter()
@@ -86,7 +86,7 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\LinesRelationManager::class,
         ];
     }
 

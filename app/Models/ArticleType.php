@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class ArticleType extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'description',
+        'created_by',
+        'updated_by',
+        'must_be_sync',
+        'sync_at'
+    ];
 }
