@@ -1,15 +1,22 @@
 <?php
 
-namespace App\Filament\Resources\PriceListResource\Pages;
+namespace App\Filament\Resources\CustomerTypeResource\Pages;
 
-use App\Filament\Resources\PriceListResource;
+use App\Filament\Resources\CustomerTypeResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 
-class EditPriceList extends EditRecord
+class EditCustomerType extends EditRecord
 {
-    protected static string $resource = PriceListResource::class;
+    protected static string $resource = CustomerTypeResource::class;
+
+    // protected function mutateFormDataBeforeSave(array $data): array
+    // {
+    //     $data['updated_by'] = auth()->id();
+
+    //     return $data;
+    // }
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
@@ -31,4 +38,5 @@ class EditPriceList extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
 }

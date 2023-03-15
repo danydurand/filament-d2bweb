@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\PriceListResource\Pages;
+namespace App\Filament\Resources\CustomerTypeResource\Pages;
 
-use App\Filament\Resources\PriceListResource;
+use App\Filament\Resources\CustomerTypeResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
 
-class CreatePriceList extends CreateRecord
+class CreateCustomerType extends CreateRecord
 {
-    protected static string $resource = PriceListResource::class;
+    protected static string $resource = CustomerTypeResource::class;
 
     protected function handleRecordCreation(array $data): Model
     {
@@ -23,5 +23,6 @@ class CreatePriceList extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
 
 }

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\PriceListResource\Pages;
+namespace App\Filament\Resources\SellerResource\Pages;
 
-use App\Filament\Resources\PriceListResource;
+use App\Filament\Resources\SellerResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
 
-class EditPriceList extends EditRecord
+class EditSeller extends EditRecord
 {
-    protected static string $resource = PriceListResource::class;
+    protected static string $resource = SellerResource::class;
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
@@ -31,4 +31,5 @@ class EditPriceList extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
 }

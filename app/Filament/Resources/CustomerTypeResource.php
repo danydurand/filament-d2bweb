@@ -2,29 +2,29 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PriceListResource\Pages;
-use App\Filament\Resources\PriceListResource\RelationManagers;
-use App\Models\PriceList;
+use App\Filament\Resources\CustomerTypeResource\Pages;
+use App\Filament\Resources\CustomerTypeResource\RelationManagers;
+use App\Models\CustomerType;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Illuminate\Database\Eloquent\Builder;
+
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Card;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Select;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PriceListResource extends Resource
+
+class CustomerTypeResource extends Resource
 {
-    protected static ?string $model = PriceList::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
+    protected static ?string $model = CustomerType::class;
+    protected static ?string $navigationIcon = 'heroicon-o-color-swatch';
+    protected static ?string $modelLabel = 'Customer Type';
     protected static ?string $navigationGroup = 'System Management';
-    protected static ?string $modelLabel = 'Price List';
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
 
     public static function form(Form $form): Form
@@ -32,9 +32,16 @@ class PriceListResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                    TextInput::make('name')
-                        ->maxLength(50)
+                    TextInput::make('code')
+                        ->maxLength(6)
                         ->required(),
+                    TextInput::make('description')
+                        ->maxLength(100)
+                        ->required(),
+                    Select::make('price_list_id')
+                        ->label('Price List')
+                        ->required()
+                        ->relationship('price_list','name'),
                 ])
             ]);
     }
@@ -44,11 +51,14 @@ class PriceListResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('name')
+                TextColumn::make('description')
                     ->sortable()
                     ->searchable(),
-                TextColumn::make('customer_types_count')
-                    ->label('Customer Types')
+                TextColumn::make('price_list.name')
+                    ->sortable()
+                    ->searchable(),
+                TextColumn::make('customers_count')
+                    ->label('Customers')
                     ->alignCenter()
                     ->sortable(),
                 TextColumn::make('created_at')
@@ -88,9 +98,9 @@ class PriceListResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPriceLists::route('/'),
-            'create' => Pages\CreatePriceList::route('/create'),
-            'edit' => Pages\EditPriceList::route('/{record}/edit'),
+            'index' => Pages\ListCustomerTypes::route('/'),
+            'create' => Pages\CreateCustomerType::route('/create'),
+            'edit' => Pages\EditCustomerType::route('/{record}/edit'),
         ];
     }
 }

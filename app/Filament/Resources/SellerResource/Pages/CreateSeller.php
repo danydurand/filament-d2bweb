@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Filament\Resources\PriceListResource\Pages;
+namespace App\Filament\Resources\SellerResource\Pages;
 
-use App\Filament\Resources\PriceListResource;
+use App\Filament\Resources\SellerResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Database\Eloquent\Model;
 
-class CreatePriceList extends CreateRecord
+class CreateSeller extends CreateRecord
 {
-    protected static string $resource = PriceListResource::class;
+    protected static string $resource = SellerResource::class;
 
     protected function handleRecordCreation(array $data): Model
     {
@@ -23,5 +23,6 @@ class CreatePriceList extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
 
 }
