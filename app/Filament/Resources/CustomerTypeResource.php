@@ -29,63 +29,61 @@ class CustomerTypeResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Card::make()->schema([
-                    TextInput::make('code')
-                        ->maxLength(6)
-                        ->required(),
-                    TextInput::make('description')
-                        ->maxLength(100)
-                        ->required(),
-                    Select::make('price_list_id')
-                        ->label('Price List')
-                        ->required()
-                        ->relationship('price_list','name'),
-                ])
-            ]);
+        return $form->schema([
+            Card::make()->schema([
+                TextInput::make('code')
+                    ->maxLength(6)
+                    ->required(),
+                TextInput::make('description')
+                    ->maxLength(100)
+                    ->required(),
+                Select::make('price_list_id')
+                    ->label('Price List')
+                    ->required()
+                    ->relationship('price_list','name'),
+            ])
+        ]);
     }
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('description')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('price_list.name')
-                    ->sortable()
-                    ->searchable(),
-                TextColumn::make('customers_count')
-                    ->label('Customers')
-                    ->alignCenter()
-                    ->sortable(),
-                TextColumn::make('created_at')
-                    ->dateTime("Y-m-d H:i:s")
-                    ->alignCenter()
-                    ->sortable(),
-                TextColumn::make('updated_at')
-                    ->dateTime("Y-m-d H:i:s")
-                    ->alignCenter()
-                    ->sortable(),
-                // TextColumn::make('must_be_sync')
-                //     ->label('Must Be Sync')
-                //     ->alignCenter()
-                //     ->sortable(),
-                // TextColumn::make('sync_at')
-                //     ->dateTime()
-                //     ->sortable(),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-            ]);
+        return $table->columns([
+            TextColumn::make('id'),
+            TextColumn::make('description')
+                ->sortable()
+                ->searchable(),
+            TextColumn::make('price_list.name')
+                ->sortable()
+                ->searchable(),
+            TextColumn::make('customers_count')
+                ->label('Customers')
+                ->alignCenter()
+                ->sortable(),
+            TextColumn::make('created_at')
+                ->dateTime("Y-m-d H:i:s")
+                ->alignCenter()
+                ->sortable(),
+            TextColumn::make('updated_at')
+                ->dateTime("Y-m-d H:i:s")
+                ->alignCenter()
+                ->sortable(),
+            // TextColumn::make('must_be_sync')
+            //     ->label('Must Be Sync')
+            //     ->alignCenter()
+            //     ->sortable(),
+            // TextColumn::make('sync_at')
+            //     ->dateTime()
+            //     ->sortable(),
+        ])
+        ->filters([
+            //
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\DeleteBulkAction::make(),
+        ]);
     }
 
     public static function getRelations(): array

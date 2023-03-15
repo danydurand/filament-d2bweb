@@ -20,6 +20,8 @@ class EditCustomerType extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
+        $data['code'] = strtoupper($data['code']);
+        $data['description'] = strtoupper($data['description']);
         $data['updated_by'] = auth()->id();
 
         $record->update($data);

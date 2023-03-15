@@ -100,7 +100,7 @@ class SellerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\CustomersRelationManager::class,
         ];
     }
 

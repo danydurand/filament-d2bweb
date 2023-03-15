@@ -12,6 +12,8 @@ class Category extends Model
     protected $fillable = [
         'code',
         'description',
+        'created_by',
+        'updated_by',
         'must_be_sync',
         'sync_at'
     ];

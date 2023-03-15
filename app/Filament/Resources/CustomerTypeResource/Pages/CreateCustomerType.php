@@ -13,6 +13,8 @@ class CreateCustomerType extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
+        $data['code'] = strtoupper($data['code']);
+        $data['description'] = strtoupper($data['description']);
         $data['created_by'] = auth()->id();
         $data['updated_by'] = auth()->id();
 

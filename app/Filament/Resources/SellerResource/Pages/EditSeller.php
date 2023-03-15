@@ -13,6 +13,7 @@ class EditSeller extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
+        $data['name'] = strtoupper($data['name']);
         $data['updated_by'] = auth()->id();
 
         $record->update($data);

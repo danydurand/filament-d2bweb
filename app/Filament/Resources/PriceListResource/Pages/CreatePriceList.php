@@ -13,6 +13,7 @@ class CreatePriceList extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
+        $data['name'] = strtoupper($data['name']);
         $data['created_by'] = auth()->id();
         $data['updated_by'] = auth()->id();
 

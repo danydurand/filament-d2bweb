@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Resources\SellerResource\RelationManagers;
 
-use App\Filament\Resources\CustomerResource\Pages;
-use App\Filament\Resources\CustomerResource\RelationManagers;
-use App\Models\Customer;
 use Filament\Forms;
 use Filament\Resources\Form;
-use Filament\Resources\Resource;
+use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,14 +18,12 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Grid;
 
 
-class CustomerResource extends Resource
+class CustomersRelationManager extends RelationManager
 {
-    protected static ?string $model = Customer::class;
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static string $relationship = 'customers';
     protected static ?string $modelLabel = 'Customer';
-    protected static ?string $navigationGroup = 'System Management';
-    protected static ?int $navigationSort = 4;
 
+    protected static ?string $recordTitleAttribute = 'business_name';
 
     public static function form(Form $form): Form
     {
@@ -75,7 +70,6 @@ class CustomerResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
                 TextColumn::make('fiscal_number')
                     ->sortable()
                     ->searchable(),
@@ -85,41 +79,19 @@ class CustomerResource extends Resource
                 TextColumn::make('contact_name')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('seller.name')
-                    ->searchable()
-                    ->sortable(),
-                // TextColumn::make('phones')
-                //     ->sortable()
-                //     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime("Y-m-d H:i")
-                    ->alignCenter()
-                    ->sortable(),
             ])
             ->filters([
                 //
             ])
+            ->headerActions([
+                Tables\Actions\CreateAction::make(),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }
-
-    public static function getRelations(): array
-    {
-        return [
-            //
-        ];
-    }
-
-    public static function getPages(): array
-    {
-        return [
-            'index' => Pages\ListCustomers::route('/'),
-            'create' => Pages\CreateCustomer::route('/create'),
-            'edit' => Pages\EditCustomer::route('/{record}/edit'),
-        ];
     }
 }
