@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Article extends Model
 {
@@ -125,6 +126,22 @@ class Article extends Model
         'created_by' => 'integer',
         'updated_by' => 'integer',
     ];
+
+    public $appends = [
+        'short_desc',
+    ];
+
+
+    //-------------------
+    // Accessor methods
+    //-------------------
+
+    public function getShortDescAttribute()
+    {
+        return Str::substr($this->description,0,25);
+    }
+
+
 
     public function business(): BelongsTo
     {

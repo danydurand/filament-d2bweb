@@ -68,6 +68,24 @@ class Order extends Model
         'updated_by' => 'integer',
     ];
 
+    public $appends = [
+        'order_lines_count',
+    ];
+
+    //-------------------
+    // Accessor methods
+    //-------------------
+
+    public function getOrderLinesCountAttribute()
+    {
+        return $this->orderLines()->count();
+    }
+
+    
+    //---------------
+    // Relationships
+    //---------------
+
     public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);

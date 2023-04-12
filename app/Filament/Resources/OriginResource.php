@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\LineResource\Pages;
-use App\Filament\Resources\LineResource\RelationManagers;
-use App\Models\Line;
+use App\Filament\Resources\OriginResource\Pages;
+use App\Filament\Resources\OriginResource\RelationManagers;
+use App\Models\Origin;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -16,18 +16,19 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Card;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Grid;
 
+use Filament\Tables\Columns\TextColumn;
 
-class LineResource extends Resource
+class OriginResource extends Resource
 {
-    protected static ?string $model = Line::class;
-    protected static ?string $navigationIcon = 'heroicon-o-menu';
-    protected static ?string $modelLabel = 'Line';
+    protected static ?string $model = Origin::class;
     protected static ?string $navigationGroup = 'Tables';
-    protected static ?int $navigationSort = 6;
+    protected static ?string $modelLabel = 'Origin';
+
+
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
     {
@@ -37,10 +38,6 @@ class LineResource extends Resource
                     TextInput::make('description')
                         ->maxLength(100)
                         ->required(),
-                    Select::make('category_id')
-                        ->label('Category')
-                        ->required()
-                        ->relationship('category', 'description'),
                 ])
             ])
         ]);
@@ -50,12 +47,11 @@ class LineResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('description')
-                    ->searchable(),
-                TextColumn::make('category.description')
-                    ->searchable()
+                TextColumn::make('id')
                     ->sortable(),
+                TextColumn::make('description')
+                    ->sortable()
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime("Y-m-d H:i")
                     ->alignCenter()
@@ -82,9 +78,9 @@ class LineResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListLines::route('/'),
-            'create' => Pages\CreateLine::route('/create'),
-            'edit' => Pages\EditLine::route('/{record}/edit'),
+            'index' => Pages\ListOrigins::route('/'),
+            'create' => Pages\CreateOrigin::route('/create'),
+            'edit' => Pages\EditOrigin::route('/{record}/edit'),
         ];
     }
 }

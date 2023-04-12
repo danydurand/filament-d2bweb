@@ -23,7 +23,7 @@ class CustomerTypeResource extends Resource
     protected static ?string $model = CustomerType::class;
     protected static ?string $navigationIcon = 'heroicon-o-color-swatch';
     protected static ?string $modelLabel = 'Customer Type';
-    protected static ?string $navigationGroup = 'System Management';
+    protected static ?string $navigationGroup = 'Tables';
     protected static ?int $navigationSort = 2;
 
 

@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Card;
-use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Grid;
+use Filament\Tables\Columns\TextColumn;
 
 
 class CustomerResource extends Resource
@@ -26,8 +26,8 @@ class CustomerResource extends Resource
     protected static ?string $model = Customer::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
     protected static ?string $modelLabel = 'Customer';
-    protected static ?string $navigationGroup = 'System Management';
-    protected static ?int $navigationSort = 4;
+    protected static ?string $navigationGroup = 'Orders';
+    protected static ?int $navigationSort = 2;
 
 
     public static function form(Form $form): Form
@@ -38,11 +38,11 @@ class CustomerResource extends Resource
                     TextInput::make('code')
                         ->maxLength(6)
                         ->required(),
-                    TextInput::make('fiscal_number')
-                        ->maxLength(30)
-                        ->required(),
                     TextInput::make('business_name')
                         ->maxLength(100)
+                        ->required(),
+                    TextInput::make('fiscal_number')
+                        ->maxLength(30)
                         ->required(),
                     Select::make('customer_type_id')
                         ->label('Type')
@@ -55,9 +55,6 @@ class CustomerResource extends Resource
                     TextInput::make('contact_name')
                         ->maxLength(60)
                         ->required(),
-                    TextInput::make('phones')
-                        ->maxLength(60)
-                        ->required(),
                     Textarea::make('fiscal_address')
                         ->maxLength(250)
                         ->rows(2)
@@ -65,6 +62,9 @@ class CustomerResource extends Resource
                     Textarea::make('dispatch_address')
                         ->maxLength(250)
                         ->rows(2)
+                        ->required(),
+                    TextInput::make('phones')
+                        ->maxLength(60)
                         ->required(),
                 ])
             ])
@@ -76,34 +76,39 @@ class CustomerResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id'),
-                TextColumn::make('fiscal_number')
-                    ->sortable()
-                    ->searchable(),
                 TextColumn::make('business_name')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('fiscal_number')
+                    ->sortable()
+                    ->toggleable()
+                    ->searchable(),
                 TextColumn::make('contact_name')
                     ->searchable()
+                    ->toggleable()
                     ->sortable(),
                 TextColumn::make('seller.name')
                     ->searchable()
+                    ->toggleable()
                     ->sortable(),
-                // TextColumn::make('phones')
-                //     ->sortable()
-                //     ->searchable(),
+                TextColumn::make('phones')
+                    ->sortable()
+                    ->toggleable()
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime("Y-m-d H:i")
                     ->alignCenter()
+                    ->toggleable()
                     ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 

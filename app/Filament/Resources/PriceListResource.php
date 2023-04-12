@@ -20,10 +20,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class PriceListResource extends Resource
 {
     protected static ?string $model = PriceList::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-list';
-    protected static ?string $navigationGroup = 'System Management';
-    protected static ?string $modelLabel = 'Price List';
+    protected static ?string $navigationGroup = 'Tables';
+    protected static ?string $modelLabel = 'Price Lists';
     protected static ?int $navigationSort = 1;
 
 
